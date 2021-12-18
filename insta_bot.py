@@ -16,7 +16,15 @@ class InstaBot:
     self.driver = webdriver.Chrome(InstaBot._get_os())
     self.driver.get('https://instagram.com/')
   
-  def login():
+  def login(self):
+    """Will log the user in"""
+    
+    # login_username = self.driver.find_element_by_name('username')
+    login_username = self.driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input')
+    login_username.click()
+    login_username.send_keys("username")
+    
+    password = self.driver.find_element_by_name('password')
     pass
   
   @classmethod
