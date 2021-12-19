@@ -87,11 +87,6 @@ class InstaBot:
     
     self.driver.get('https://www.instagram.com/accounts/access_tool/accounts_following_you')
     self._load_account_names()
-    
-     
-   
-      
-      
   
   @classmethod
   def _get_os(cls):
