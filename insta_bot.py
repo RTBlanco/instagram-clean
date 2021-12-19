@@ -27,6 +27,7 @@ class InstaBot:
     
     # NOTE: need to wait for the login area to be fully loaded
     # ID for the the form is loginForm 
+    # self.navigate_to_login()
     
     login_username = self.driver.find_element_by_name('username')
     login_username.click()
@@ -41,6 +42,7 @@ class InstaBot:
     
     self._remove_save_login_msg()
     self._remove_notification_msg()
+    self._navigate_to_account()
     
     print("loggin in...")
     
@@ -56,8 +58,12 @@ class InstaBot:
     """ This will remove the notification modal """
     
     not_now_button = self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div/div[3]/button[2]')
-    not_now_button.click()
+    not_now_button.click()  
     
+  def _navigate_to_account(self):
+    """ Will navigate the bot to users account"""
+    self.driver.get(f'https://instagram.com/{self.username}')
+      
   
   @classmethod
   def _get_os(cls):
