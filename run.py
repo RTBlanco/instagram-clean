@@ -7,5 +7,5 @@ load_dotenv()
 username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 
-bot = InstaBot()
-bot.login(username, password)
+bot = InstaBot(username, password)
+bot.login()

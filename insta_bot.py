@@ -9,17 +9,20 @@ from selenium.webdriver.chrome.options import Options
 
 
 class InstaBot:
-  def __init__(self):
+  def __init__(self, username, password):
     chrome_option = Options()
     chrome_option.add_argument('--headless')
     
-    self.driver = webdriver.Chrome(InstaBot._get_os())
-    self.driver.get('https://instagram.com/')
     
+    self.username = username
+    self.password = password
+    
+    self.driver = webdriver.Chrome(InstaBot._get_os())
+    self.driver.get(f'https://instagram.com/{self.username}')
     # simple wait
-    self.driver.implicitly_wait(3)
+    self.driver.implicitly_wait(20)
   
-  def login(self,username, password):
+  def login(self):
     """Will log the user in"""
     
     # NOTE: need to wait for the login area to be fully loaded
@@ -27,14 +30,17 @@ class InstaBot:
     
     login_username = self.driver.find_element_by_name('username')
     login_username.click()
-    login_username.send_keys(username)
+    login_username.send_keys(self.username)
     
     login_password = self.driver.find_element_by_name('password')
     login_password.click()
-    login_password.send_keys(password)
+    login_password.send_keys(self.password)
     
     button = self.driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button')
     button.click()
+    
+    self._remove_save_login_msg()
+    self._remove_notification_msg()
     
     print("loggin in...")
     
@@ -42,7 +48,16 @@ class InstaBot:
     """ This will remove the modal that appears that asks the users 
         if they want to save their information
     """
-    pass
+    
+    not_now_button = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button')
+    not_now_button.click()
+    
+  def _remove_notification_msg(self):
+    """ This will remove the notification modal """
+    
+    not_now_button = self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div/div[3]/button[2]')
+    not_now_button.click()
+    
   
   @classmethod
   def _get_os(cls):
