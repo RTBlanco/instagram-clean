@@ -15,16 +15,33 @@ class InstaBot:
     
     self.driver = webdriver.Chrome(InstaBot._get_os())
     self.driver.get('https://instagram.com/')
+    
+    # simple wait
+    self.driver.implicitly_wait(3)
   
-  def login(self):
+  def login(self,username, password):
     """Will log the user in"""
     
-    # login_username = self.driver.find_element_by_name('username')
-    login_username = self.driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input')
-    login_username.click()
-    login_username.send_keys("username")
+    # NOTE: need to wait for the login area to be fully loaded
+    # ID for the the form is loginForm 
     
-    password = self.driver.find_element_by_name('password')
+    login_username = self.driver.find_element_by_name('username')
+    login_username.click()
+    login_username.send_keys(username)
+    
+    login_password = self.driver.find_element_by_name('password')
+    login_password.click()
+    login_password.send_keys(password)
+    
+    button = self.driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button')
+    button.click()
+    
+    print("loggin in...")
+    
+  def _remove_save_login_msg(self):
+    """ This will remove the modal that appears that asks the users 
+        if they want to save their information
+    """
     pass
   
   @classmethod
