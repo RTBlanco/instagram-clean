@@ -23,7 +23,7 @@ class InstaBot:
     self.driver.implicitly_wait(20)
   
   def login(self):
-    """Will log the user in"""
+    """ Will log the user in """
     
     # NOTE: need to wait for the login area to be fully loaded
     # ID for the the form is loginForm 
@@ -61,7 +61,7 @@ class InstaBot:
     not_now_button.click()  
     
   def _navigate_to_account(self):
-    """ Will navigate the bot to users account"""
+    """ Will navigate the bot to users account """
     self.driver.get(f'https://instagram.com/{self.username}')
       
   
