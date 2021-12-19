@@ -18,7 +18,7 @@ class InstaBot:
     self.password = password
     
     self.driver = webdriver.Chrome(InstaBot._get_os())
-    self.driver.get(f'https://instagram.com/{self.username}')
+    self.driver.get('https://instagram.com/')
     # simple wait
     self.driver.implicitly_wait(20)
   

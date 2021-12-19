@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-username = os.environ.get('USERNAME')
-password = os.environ.get('PASSWORD')
-
+username = os.environ.get('INSTA_USERNAME')
+password = os.environ.get('INSTA_PASSWORD')
+print(username)
 bot = InstaBot(username, password)
 bot.login()
