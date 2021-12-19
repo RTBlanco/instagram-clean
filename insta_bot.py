@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 
+
 class InstaBot:
   def __init__(self, username, password):
     chrome_option = Options()
@@ -42,7 +43,7 @@ class InstaBot:
     
     self._remove_save_login_msg()
     self._remove_notification_msg()
-    self._navigate_to_account()
+    # self._navigate_to_account()
     
     print("loggin in...")
     
@@ -63,6 +64,33 @@ class InstaBot:
   def _navigate_to_account(self):
     """ Will navigate the bot to users account """
     self.driver.get(f'https://instagram.com/{self.username}')
+    
+  # def _check_if_view_more_exist(self):
+  #   try:
+  #     self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/main/button')
+  #   except exceptions.NoSuchElementException:
+  #     return False
+  #   return True
+  
+  def _load_account_names(self):
+    while True:
+      try:
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver, 1).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/article/main/button'))))
+      except exceptions.TimeoutException:
+        break
+      # self.driver.execute_script('arguments[0].click();', self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/main/button').click())
+      # self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/article/main/button').click()
+    
+    
+  def get_followers(self):
+    """ will return an array containing all the users that follow your account """
+    
+    self.driver.get('https://www.instagram.com/accounts/access_tool/accounts_following_you')
+    self._load_account_names()
+    
+     
+   
+      
       
   
   @classmethod
